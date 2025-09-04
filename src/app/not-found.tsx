@@ -1,12 +1,16 @@
+"use client";
 
-import Link from 'next/link';
+import { useRouter } from "next/navigation";
+
 export default function NotFound() {
+  const router = useRouter();
+
   return (
     <>
       <section className="flex min-h-screen justify-center items-center">
         <div className="text-center">
           <h1 className="text-4xl mb-5">ไม่พบหน้าที่เรียกใช้</h1>
-          <Link href="/">ย้อนกลับหน้าหลัก</Link>
+          <button onClick={() => router.back()}>ย้อนกลับ</button>
         </div>
       </section>
     </>

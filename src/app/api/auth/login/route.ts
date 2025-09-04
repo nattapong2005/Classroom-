@@ -9,7 +9,7 @@ interface User {
 
 export async function GET() {
   return NextResponse.json({
-    message: "ควย",
+    message: "Erorr",
   });
 
 }
