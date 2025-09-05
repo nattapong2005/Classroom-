@@ -27,3 +27,10 @@ h1 {
 body {
   background-color: #f6f9fc;
 }
+
+@keyframes fadeIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

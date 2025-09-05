@@ -1,10 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import MyModal from "./../../../components/Modal";
 
 interface data {
   id: number;
   course_name: string;
   course_description: string;
-  class_color: string,
+  class_color: string;
   student_count: number;
 }
 
@@ -15,7 +19,6 @@ const fake_data: data[] = [
     course_description: "ปวช.1 เทคโนโลยีสารสนเทศ",
     class_color: "bg-blue-600",
     student_count: 20,
-    
   },
   {
     id: 2,
@@ -34,6 +37,12 @@ const fake_data: data[] = [
 ];
 
 export default function Page() {
+  const [isCreateClassModalOpen, setIsCreateClassModalOpen] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }
+
   return (
     <>
       <div className="flex justify-between items-start sm:item-center mb-2 mt-2">
@@ -41,7 +50,10 @@ export default function Page() {
           <h1 className="text-2xl">ชั้นเรียนของคุณ</h1>
           <h2>ยินดีต้อนรับ, Mr.Nattapong Nakaom</h2>
         </div>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded flex gap-2 items-center cursor-pointer">
+        <button
+          onClick={() => setIsCreateClassModalOpen(true)}
+          className="bg-primary hover:bg-secondary text-white py-2 px-4 rounded flex gap-2 items-center cursor-pointer"
+        >
           <FaPlus /> <span>สร้างชั้นเรียน</span>
         </button>
       </div>
@@ -53,11 +65,30 @@ export default function Page() {
               <h2>{d.course_description}</h2>
             </div>
             <div className="flex justify-end p-5">
-                <p className="text-lg">{d.student_count} คน</p>
+              <p className="text-lg">{d.student_count} คน</p>
             </div>
           </div>
         ))}
       </div>
+      <MyModal isOpen={isCreateClassModalOpen} onClose={() => setIsCreateClassModalOpen(false)}>
+        <form action="">
+          <h1 className="mb-5 text-2xl">สร้างชั้นเรียนใหม่</h1>
+          <div className="mb-5">
+            <label htmlFor="class" className="block mb-2">ชื่อชั้นเรียน</label>
+            <input type="text" className="border border-gray-300 rounded-md p-2 w-full" placeholder="กรอกชื่อชั้นเรียน" />
+          </div>
+          <div className="mb-5">
+             <label htmlFor="class" className="block mb-2">ระดับชั้น</label>
+            <select name="" id="" className="border border-gray-300 rounded-md p-2 w-full">
+              <option defaultValue={"0"}>เลือกระดับชั้น</option>
+              <option value="1">ปวช.1 เทคโนโอวัลติน</option>
+            </select>
+          </div>
+          <div>
+            <button className="bg-primary hover:bg-secondary text-white py-2 px-4 rounded w-full cursor-pointer">ยืนยัน</button>
+          </div>
+        </form>
+      </MyModal>
     </>
   );
 }
